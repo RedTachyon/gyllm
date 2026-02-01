@@ -117,7 +117,7 @@ uv pip install --prerelease=allow \
 Notebook that mirrors `scripts/ttt_reinforce.py`:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
-https://colab.research.google.com/github/RedTachyon/nanorl/blob/main/notebooks/ttt_reinforce_colab.ipynb
+https://colab.research.google.com/github/RedTachyon/gyllm/blob/master/notebooks/ttt_reinforce_colab.ipynb
 )
 
 ## Development (uv)
