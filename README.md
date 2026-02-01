@@ -52,9 +52,10 @@ actions = {r["actor"]: "hi" for r in requests if r["needs_action"]}
 requests = env.step(actions)
 ```
 
-Run a couple of RL training scripts with `uv run`:
+If you clone the repo, you can run a some RL training scripts with `uv run`:
 
 ```bash
+uv sync
 # PPO on tic tac toe
 uv run scripts/train_ppo_agent.py --config scripts/configs/ppo_ttt.yaml
 
