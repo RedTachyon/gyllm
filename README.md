@@ -52,6 +52,16 @@ actions = {r["actor"]: "hi" for r in requests if r["needs_action"]}
 requests = env.step(actions)
 ```
 
+Run a couple of RL training scripts with `uv run`:
+
+```bash
+# PPO on tic tac toe
+uv run scripts/train_ppo_agent.py --config scripts/configs/ppo_ttt.yaml
+
+# GRPO on MATH
+uv run scripts/train_grpo_agent.py --config scripts/configs/grpo_math.yaml
+```
+
 ## Install (PyPI)
 
 Python 3.11+ (3.12 recommended).
