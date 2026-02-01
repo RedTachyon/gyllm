@@ -1,9 +1,9 @@
 [project]
 name = "gyllm_nanorl"
-version = "0.0.0"
+version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "gyllm[reasoning,web,openenv-openspiel]",
+    "gyllm[reasoning,web]",
     "nanorl",
     "pytest>=9.0.2",
 ]

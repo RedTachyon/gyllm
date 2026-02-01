@@ -67,7 +67,7 @@ To run without logging, set `WANDB_MODE=disabled` (or `WANDB_MODE=offline`) in y
 
 ## Install (PyPI)
 
-Python 3.11+ (3.12 recommended).
+Python 3.12+.
 
 Using `uv`:
 
