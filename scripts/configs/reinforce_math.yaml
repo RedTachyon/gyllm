@@ -1,0 +1,30 @@
+env:
+  name: reasoning/qa
+  kwargs:
+    problems_per_step: 4
+    repetitions_per_problem: 2
+num_envs: 1
+episodes: 16
+num_updates: 100
+lr: 1.0e-5
+max_grad_norm: 1.0
+minibatch_size: 2
+model_id: Qwen/Qwen2.5-3B-Instruct
+dtype: bfloat16
+device_map: cuda
+activation_checkpointing: true
+sampling:
+  temperature: 1.0
+  max_tokens: 512
+nanollm:
+  gpu_memory_utilization: 0.4
+  enable_sleep_mode: true
+max_steps: null
+wandb:
+  project: nanorl-reinforce
+  env_name: math
+dataset:
+  id: EleutherAI/hendrycks_math
+  config: null
+  split: train
+  kwargs: {}

@@ -1,0 +1,88 @@
+[project]
+name = "gyllm_nanorl"
+version = "0.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "gyllm[reasoning,web,openenv-openspiel]",
+    "nanorl",
+    "pytest>=9.0.2",
+]
+
+[project.optional-dependencies]
+# Only enable on Spark
+spark = ["nanorl[spark]"]
+
+
+[tool.uv]
+# Root is just a workspace controller, not a package you publish.
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+# Force these to resolve from the local workspace (editable installs).
+[tool.uv.sources]
+gyllm = { workspace = true }
+nanorl = { workspace = true }
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+src = ["packages/gyllm/src", "packages/nanorl/src"]
+include = ["packages/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
+extend-exclude = [
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "__pypackages__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+]
+
+[tool.ruff.lint]
+select = [
+    "E", "F",      # pycodestyle errors, pyflakes
+    "W",           # pycodestyle warnings
+    "I",           # import sorting (isort-equivalent)
+    "B",           # flake8-bugbear
+    "UP",          # pyupgrade
+    "SIM",         # simplifications
+    "C4",          # comprehensions
+    "PIE",         # misc tidy-ups
+    "RUF",         # Ruff-specific rules
+]
+ignore = [
+    "E501",        # line length handled by formatter
+    "B008",        # function calls in argument defaults (often used intentionally with FastAPI/Typer/etc.)
+    "RUF001",      # ambiguous unicode characters in strings
+    "RUF002",      # ambiguous unicode characters in docstrings
+    "RUF003",      # ambiguous unicode characters in comments
+    "RUF012",      # Some problem with ClassVar
+]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests often legitimately use asserts, magic values, etc. Adjust to taste.
+"tests/**" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+
+[tool.ty.src]
+include = ["packages/gyllm/src", "packages/nanorl/src", "tests", "scripts"]
+exclude = [
+    "notebooks/**",
+    ".venv/**"
+]

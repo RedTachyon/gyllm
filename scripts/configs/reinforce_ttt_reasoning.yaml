@@ -1,0 +1,39 @@
+env:
+  name: simple/tic_tac_toe
+  kwargs:
+    opponent: random
+agent:
+  type: reasoning
+  kwargs:
+    reasoning_mode: drop
+    system_prompt_extra: |
+      You may think step by step before choosing an action.
+      When you respond, put the action inside <action>...</action> tags.
+      The action is parsed by taking the text inside the final <action> tag.
+      Do not include anything after the closing </action> tag.
+num_envs: 32
+episodes: 32
+num_updates: 100
+lr: 5e-6
+max_grad_norm: 1.0
+minibatch_size: 2
+model_id: Qwen/Qwen2.5-3B-Instruct
+dtype: bfloat16
+device_map: cuda
+activation_checkpointing: true
+sampling:
+  temperature: 1.0
+  max_tokens: 512
+nanollm:
+  gpu_memory_utilization: 0.2
+  enable_sleep_mode: true
+max_steps: null
+wandb:
+  project: nanorl-reinforce
+  env_name: tic_tac_toe_reasoning
+dataset:
+  id: null
+  config: null
+  split: train
+  kwargs: {}
+normalizer: null

@@ -1,0 +1,58 @@
+[project]
+name = "nanorl"
+version = "0.1.0"
+description = "Rollout and RL utilities for LLM agents."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "gyllm>=0.1.0",
+    "torch>=2.9.0",
+    "vllm>=0.11.0",
+    "datasets",
+    "omegaconf",
+    "transformers",
+    "wandb",
+    "accelerate",
+]
+
+[project.optional-dependencies]
+# Spark enables:
+# - cu130 PyTorch (via a uv-only index selection)
+# - Spark extras (xgrammar/triton/flashinfer-python), allowing prereleases
+# - vLLM pinned to the cu130/aarch64 wheel URL
+spark = [
+    "vllm",
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "xgrammar",
+    "triton",
+    "flashinfer-python",
+]
+
+[tool.uv]
+# Needed for Spark extras which may resolve to prereleases
+prerelease = "allow"
+
+[tool.uv.sources]
+# When installing with `--extra spark`, route PyTorch to the cu130 index.
+torch = [{ index = "pytorch-cu130", extra = "spark" }]
+torchvision = [{ index = "pytorch-cu130", extra = "spark" }]
+torchaudio = [{ index = "pytorch-cu130", extra = "spark" }]
+
+# When installing with `--extra spark`, install vLLM from the cu130/aarch64 wheel.
+vllm = [{ url = "https://github.com/vllm-project/vllm/releases/download/v0.14.0/vllm-0.14.0+cu130-cp38-abi3-manylinux_2_35_aarch64.whl", extra = "spark" }]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[project.urls]
+Homepage = "https://github.com/RedTachyon/nanorl"
+Repository = "https://github.com/RedTachyon/nanorl"
+
+[build-system]
+requires = ["uv_build>=0.9.10,<0.10.0"]
+build-backend = "uv_build"

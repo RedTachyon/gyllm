@@ -1,0 +1,30 @@
+env:
+  name: reasoning/qa
+  kwargs:
+    problems_per_step: 8
+    repetitions_per_problem: 4
+num_envs: 1
+episodes: 32
+num_updates: 100
+lr: 1.0e-5
+max_grad_norm: 1.0
+minibatch_size: 2
+model_id: Qwen/Qwen2.5-3B-Instruct
+dtype: bfloat16
+device_map: cuda
+activation_checkpointing: true
+sampling:
+  temperature: 1.0
+  max_tokens: 512
+nanollm:
+  gpu_memory_utilization: 0.4
+  enable_sleep_mode: true
+max_steps: null
+wandb:
+  project: nanorl-grpo
+  env_name: reasoning_qa_gsm8k
+dataset:
+  id: openai/gsm8k
+  config: main
+  split: train
+  kwargs: {}

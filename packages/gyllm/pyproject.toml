@@ -1,0 +1,78 @@
+[project]
+name = "gyllm"
+version = "0.1.0"
+description = "Environment API for LLM agents."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+[project.optional-dependencies]
+reasoning = [
+    "datasets",
+    "math-verify",
+    "regex",
+]
+web = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+]
+openenv-atari = [
+    "ale-py",
+]
+openenv-browsergym = [
+    "browsergym-miniwob",
+    "browsergym-visualwebarena",
+    "browsergym-webarena",
+    "browsergym-workarena",
+    "gymnasium",
+]
+openenv-openspiel = [
+    "open_spiel",
+]
+openenv-sumo-rl = [
+    "sumo-rl",
+]
+openenv-textarena = [
+    "textarena",
+]
+openenv = [
+    "ale-py",
+    "browsergym-miniwob",
+    "browsergym-visualwebarena",
+    "browsergym-webarena",
+    "browsergym-workarena",
+    "gymnasium",
+    "open_spiel",
+    "sumo-rl",
+    "textarena",
+]
+all = [
+    "ale-py",
+    "browsergym-miniwob",
+    "browsergym-visualwebarena",
+    "browsergym-webarena",
+    "browsergym-workarena",
+    "datasets",
+    "gymnasium",
+    "math-verify",
+    "regex",
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+    "open_spiel",
+    "sumo-rl",
+    "textarena",
+]
+
+[project.scripts]
+gyllm-web = "gyllm.web.cli:main"
+
+[tool.uv.build]
+include = ["src/gyllm/web/static/**"]
+
+[project.urls]
+Homepage = "https://github.com/RedTachyon/nanorl"
+Repository = "https://github.com/RedTachyon/nanorl"
+
+[build-system]
+requires = ["uv_build>=0.9.10,<0.10.0"]
+build-backend = "uv_build"

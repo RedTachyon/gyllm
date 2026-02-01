@@ -1,0 +1,40 @@
+env:
+  name: simple/tic_tac_toe
+  kwargs:
+    opponent: random
+num_envs: 32
+episodes: 32
+num_updates: 100
+lr: 5e-6
+max_grad_norm: 1.0
+minibatch_size: 2
+model_id: Qwen/Qwen2.5-3B-Instruct
+dtype: bfloat16
+device_map: cuda
+activation_checkpointing: true
+sampling:
+  temperature: 1.0
+  max_tokens: 20
+nanollm:
+  gpu_memory_utilization: 0.3
+  enable_sleep_mode: true
+max_steps: null
+wandb:
+  project: nanorl-ppo
+  env_name: tic_tac_toe
+dataset:
+  id: null
+  config: null
+  split: train
+  kwargs: {}
+normalizer: null
+ppo:
+  gamma: 1.0
+  gae_lambda: 0.95
+  clip_range: 0.2
+  clip_range_vf: 0.2
+  value_coef: 0.5
+  entropy_coef: 0.0
+  normalize_advantages: true
+  epochs: 1
+  target_kl: null
