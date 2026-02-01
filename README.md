@@ -62,6 +62,9 @@ uv run scripts/train_ppo_agent.py --config scripts/configs/ppo_ttt.yaml
 uv run scripts/train_grpo_agent.py --config scripts/configs/grpo_math.yaml
 ```
 
+Note: by default, the training scripts (and nanorl) require Weights & Biases (`wandb`).
+To run without logging, set `WANDB_MODE=disabled` (or `WANDB_MODE=offline`) in your environment.
+
 ## Install (PyPI)
 
 Python 3.11+ (3.12 recommended).
