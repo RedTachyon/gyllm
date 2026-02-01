@@ -65,6 +65,26 @@ uv run scripts/train_grpo_agent.py --config scripts/configs/grpo_math.yaml
 Note: by default, the training scripts (and nanorl) require Weights & Biases (`wandb`).
 To run without logging, set `WANDB_MODE=disabled` (or `WANDB_MODE=offline`) in your environment.
 
+## Web UI (gyllm-web)
+
+`gyllm-web` is a lightweight local UI for exploring envs. It runs a FastAPI server
+that lists available environments, lets you create sessions, reset, and step them
+with manual actions while streaming the resulting requests/rewards. It's handy for
+debugging env dynamics, prompt formatting, and reward signals before you train.
+
+```bash
+uv pip install "gyllm[web]"
+uv run gyllm-web --host 127.0.0.1 --port 8000
+```
+
+Or run it straight from the workspace without installing extras:
+
+```bash
+uv run --with "gyllm[web]" gyllm-web --host 127.0.0.1 --port 8000
+```
+
+Then open http://127.0.0.1:8000 and start a session for any registered env.
+
 ## Install (PyPI)
 
 Python 3.12+.
